@@ -1,5 +1,5 @@
 {
-  "actions_bar_placeholder": "Posez une question à un @cerveau et sélectionnez un #prompt ",
+  "actions_bar_placeholder": "Posez une question",
   "add_document": "Ajouter un document",
   "ask": "Posez une question ou décrivez une tâche.",
   "back_to_search": "Retour à la recherche",
@@ -17,6 +17,7 @@
   "feed_brain_placeholder": "Choisissez le @cerveau que vous souhaitez nourrir avec ces fichiers",
   "feedingBrain": "Vos nouvelles connaissances sont en cours de traitement. Vous pouvez continuer à discuter en attendant !",
   "history": "Histoire",
+  "home": "Accueil",
   "keyboard_shortcuts": "Raccourcis clavier",
   "last30Days": "30 derniers jours",
   "last7Days": "7 derniers jours",
@@ -57,6 +58,7 @@
   "subtitle": "Parlez à un modèle linguistique de vos données téléchargées",
   "successfully_deleted": "Chat supprimé avec succès",
   "thinking": "Réflexion...",
+  "threads": "Fils",
   "title": "Discuter avec {{brain}}",
   "today": "Aujourd'hui",
   "tooManyRequests": "Vous avez dépassé le nombre de requêtes par jour. Pour continuer à discuter, veuillez entrer une clé d'API OpenAI dans votre profil ou dans le cerveau utilisé.",

@@ -1,4 +1,5 @@
 @use "@/styles/Colors.module.scss";
+@use "@/styles/Radius.module.scss";
 @use "@/styles/Spacings.module.scss";
 
 .message_row_container {
@@ -10,7 +11,7 @@
 
   .message_row_content {
     align-self: flex-end;
-    border-radius: 12px;
+    border-radius: Radius.$big;
     width: fit-content;
     padding-block: Spacings.$spacing03;
     padding-inline: Spacings.$spacing05;
@@ -18,6 +19,7 @@
 
   .message_header {
     padding: Spacings.$spacing02;
+    overflow: hidden;
   }
 
   &.user {
@@ -32,39 +34,33 @@
     }
 
     .message_row_content {
-      background-color: Colors.$highlight;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+      background-color: Colors.$lightest-grey;
     }
   }
 
   &.brain {
     .message_header {
       display: flex;
-      justify-content: space-between;
-      width: 100%;
-
-      .left_wrapper {
-        display: flex;
-        gap: Spacings.$spacing05;
-        align-items: center;
-      }
-
-      .copy_button {
-        visibility: hidden;
-      }
+      gap: Spacings.$spacing04;
+      align-items: baseline;
     }
 
     .message_row_content {
       align-self: flex-start;
-      background-color: Colors.$light-black;
+      background-color: Colors.$primary-lightest;
       margin-left: 1px;
-    }
-  }
+      position: relative;
 
-  &:hover {
-    .message_header {
-      .copy_button {
-        visibility: visible;
+      .icons_wrapper {
+        position: absolute;
+        display: flex;
+        gap: Spacings.$spacing02;
+        left: Spacings.$spacing02;
+        top: calc(100% + #{Spacings.$spacing03});
+
+        .sources_icon_wrapper {
+          cursor: pointer;
+        }
       }
     }
   }

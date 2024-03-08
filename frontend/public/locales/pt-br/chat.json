@@ -1,5 +1,5 @@
 {
-  "actions_bar_placeholder": "Faça uma pergunta a um @cérebro e escolha sua #prompt",
+  "actions_bar_placeholder": "Faça uma pergunta",
   "add_document": "Adicionar documento",
   "ask": "Faça uma pergunta ou descreva uma tarefa.",
   "back_to_search": "Voltar para a pesquisa",
@@ -17,6 +17,7 @@
   "feed_brain_placeholder": "Escolha qual @cérebro você deseja alimentar com esses arquivos",
   "feedingBrain": "Seu conhecimento recém-adicionado está sendo processado, você pode continuar conversando enquanto isso!",
   "history": "História",
+  "home": "Início",
   "keyboard_shortcuts": "Atalhos do teclado",
   "last30Days": "Últimos 30 dias",
   "last7Days": "Últimos 7 dias",
@@ -57,6 +58,7 @@
   "subtitle": "Converse com um modelo de linguagem sobre seus dados enviados",
   "successfully_deleted": "Conversa excluída com sucesso",
   "thinking": "Pensando...",
+  "threads": "Tópicos",
   "title": "Converse com {{brain}}",
   "today": "Hoje",
   "tooManyRequests": "Você excedeu o número de solicitações por dia. Para continuar conversando, insira uma chave de API da OpenAI em seu perfil ou no cérebro utilizado.",

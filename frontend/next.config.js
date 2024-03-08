@@ -16,7 +16,7 @@ const nextConfig = {
   redirects: async () => {
     return [
       {
-        source: "/brains-management/library",
+        source: "/studio/library",
         destination: "/library",
         permanent: false,
       },
@@ -25,6 +25,7 @@ const nextConfig = {
   images: {
     domains: [
       "www.quivr.app",
+      "chat.quivr.app",
       "quivr-cms.s3.eu-west-3.amazonaws.com",
       "www.gravatar.com",
       "media.licdn.com",
@@ -50,6 +51,10 @@ const ContentSecurityPolicy = {
     "https://api.june.so",
     "https://us.posthog.com",
     "https://preview.quivr.app",
+    "https://chat.quivr.app",
+    "*.intercom.io",
+    "*.intercomcdn.com",
+    "https://*.octolane.com",
     "https://*.vercel.app",
     process.env.NEXT_PUBLIC_FRONTEND_URL,
   ],
@@ -58,6 +63,9 @@ const ContentSecurityPolicy = {
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_BACKEND_URL,
     process.env.NEXT_PUBLIC_CMS_URL,
+    "*.intercom.io",
+    "*.intercomcdn.com",
+    "https://*.octolane.com",
     "https://api.june.so",
     "https://api.openai.com",
     "https://cdn.growthbook.io",
@@ -67,6 +75,8 @@ const ContentSecurityPolicy = {
   "img-src": [
     "'self'",
     "https://www.gravatar.com",
+    "*.intercom.io",
+    "*.intercomcdn.com",
     "https://quivr-cms.s3.eu-west-3.amazonaws.com",
     "data:",
     "*",
@@ -77,12 +87,16 @@ const ContentSecurityPolicy = {
     process.env.NEXT_PUBLIC_FRONTEND_URL,
     "https://quivr-cms.s3.eu-west-3.amazonaws.com",
     "https://preview.quivr.app",
+    "https://chat.quivr.app",
     "https://*.vercel.app",
   ],
   "script-src": [
     "'unsafe-inline'",
     "'unsafe-eval'",
     "https://va.vercel-scripts.com/",
+    "*.intercom.io",
+    "*.intercomcdn.com",
+    "https://*.octolane.com",
     process.env.NEXT_PUBLIC_FRONTEND_URL,
     "https://preview.quivr.app",
     "https://*.vercel.app",
@@ -151,8 +165,7 @@ if (process.env.SENTRY_DSN) {
 
       // Suppresses source map uploading logs during build
       silent: true,
-
-      org: "quivr-0f",
+      org: "quivr-brain",
       project: "javascript-nextjs",
     },
     {
@@ -173,6 +186,12 @@ if (process.env.SENTRY_DSN) {
 
       // Automatically tree-shake Sentry logger statements to reduce bundle size
       disableLogger: true,
+
+      // Enables automatic instrumentation of Vercel Cron Monitors.
+      // See the following for more information:
+      // https://docs.sentry.io/product/crons/
+      // https://vercel.com/docs/cron-jobs
+      automaticVercelMonitors: true,
     }
   );
 } else {

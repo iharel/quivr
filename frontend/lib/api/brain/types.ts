@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
 
-import { BrainRoleType } from "@/lib/components/BrainUsers/types";
+import { BrainRoleType } from "@/app/studio/[brainId]/BrainManagementTabs/components/PeopleTab/BrainUsers/types";
 import { BrainStatus, BrainType, Model } from "@/lib/types/BrainConfig";
 
 export type ApiBrainDefinitionSchemaPropertyType = "string" | "number";
@@ -51,6 +51,11 @@ export type ApiBrainDefinition = {
   jq_instructions: string;
 };
 
+export type IntegrationSettings = {
+  integration_id?: string;
+  settings?: { [x: string]: string | undefined };
+};
+
 export type CreateBrainInput = {
   name: string;
   description: string;
@@ -63,6 +68,30 @@ export type CreateBrainInput = {
   brain_definition?: Omit<ApiBrainDefinition, "brain_id">;
   brain_secrets_values?: Record<string, string>;
   connected_brains_ids?: UUID[];
+  integration?: IntegrationSettings;
+};
+
+enum IntegrationBrainTag {
+  NEW = "new",
+  RECOMMENDED = "recommended",
+  MOST_POPULAR = "most_popular",
+  PREMIUM = "premium",
+  COMING_SOON = "coming_soon",
+  COMMUNITY = "community",
+  DEPRECATED = "deprecated",
+}
+
+export type IntegrationBrains = {
+  id: UUID;
+  integration_name: string;
+  integration_logo_url: string;
+  connection_settings: string;
+  integration_type: "custom" | "sync";
+  description: string;
+  max_files: number;
+  tags: IntegrationBrainTag[];
+  information: string;
+  integration_display_name: string;
 };
 
 export type UpdateBrainInput = Partial<CreateBrainInput>;

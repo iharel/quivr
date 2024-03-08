@@ -2,7 +2,7 @@ from typing import Any, List
 
 from langchain.docstore.document import Document
 from langchain.embeddings.base import Embeddings
-from langchain.vectorstores import SupabaseVectorStore
+from langchain_community.vectorstores import SupabaseVectorStore
 from logger import get_logger
 from supabase.client import Client
 
@@ -79,37 +79,22 @@ class CustomSupabaseVectorStore(SupabaseVectorStore):
             table,
             {
                 "query_embedding": query_embedding,
-                "match_count": self.number_docs,
+                "max_chunk_sum": self.max_input,
                 "p_brain_id": str(self.brain_id),
             },
         ).execute()
 
         match_result = [
-            (
-                Document(
-                    metadata={
-                        **search.get("metadata", {}),
-                        "id": search.get("id", ""),
-                        "similarity": search.get("similarity", 0.0),
-                    },
-                    page_content=search.get("content", ""),
-                ),
-                search.get("similarity", 0.0),
+            Document(
+                metadata={
+                    **search.get("metadata", {}),
+                    "id": search.get("id", ""),
+                    "similarity": search.get("similarity", 0.0),
+                },
+                page_content=search.get("content", ""),
             )
             for search in res.data
             if search.get("content")
         ]
 
-        documents = [doc for doc, _ in match_result]
-        max_tokens_input = self.max_input
-        documents_to_return = []
-
-        # Limits to max_tokens_input with metadata chunk_size
-        for doc in documents:
-            if doc.metadata["chunk_size"] <= max_tokens_input:
-                documents_to_return.append(doc)
-                max_tokens_input -= doc.metadata["chunk_size"]
-            else:
-                break
-
-        return documents_to_return
+        return match_result

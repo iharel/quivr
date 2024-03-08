@@ -1,9 +1,6 @@
-export interface CloseBrain {
-  id: string;
-  similarity: number;
+export interface Source {
+  frequency: number;
   name: string;
-}
-
-export interface MessageMetadata {
-  closeBrains: CloseBrain[];
+  source_url: string;
+  type: string;
 }

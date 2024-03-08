@@ -71,25 +71,29 @@ class UserUsage(UserIdentity):
         current_requests_count = self.supabase_db.get_user_requests_count_for_month(
             self.id, date
         )
-        logger.info(current_requests_count)
-        if current_requests_count == 0:
+
+        daily_requests_count = self.supabase_db.get_user_requests_count_for_day(
+            self.id, date
+        )
+
+        if daily_requests_count == 0:
             logger.info("Request count is 0, creating new record")
             if self.email is None:
                 raise ValueError("User Email should be defined for daily usage table")
             self.supabase_db.create_user_daily_usage(
                 user_id=self.id, date=date, user_email=self.email, number=number
             )
-            self.daily_requests_count = current_requests_count + number
+            self.daily_requests_count = number
             return
 
         self.supabase_db.increment_user_request_count(
             user_id=self.id,
             date=date,
-            number=number,
+            number=daily_requests_count + number,
         )
 
-        self.daily_requests_count = current_requests_count
+        self.daily_requests_count = current_requests_count + number
 
         logger.info(
-            f"User {self.email} request count updated to {current_requests_count}"
+            f"User {self.email} request count updated to {self.daily_requests_count}"
         )
